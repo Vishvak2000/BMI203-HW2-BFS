@@ -76,8 +76,6 @@ However, since these are both stored as strings, you can treat them as equivalen
 
 The second network is a subgraph of the first, consisting of only the nodes and edges along the paths between a small subset of faculty. There are 30 nodes and 64 edges.
 
-# Completing the assignment
-Make sure to push all your code to github, ensure that your unit tests are correct, and submit a link to your github through the google classroom assignment.
 
 # Grading
 
