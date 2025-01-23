@@ -1,11 +1,6 @@
 # Assignment 2
 Breadth-first search
 
-# Assignment Overview
-The purpose of this assignment is to get you comfortable working with graph structures and to implement a breadth-first search function to traverse the graph and find the shortest path between nodes.
-
-# Assignment Tasks
-
 ## Coding Assessment
 In search/graph.py:
 * Define the function bfs that takes in a graph, start node, and optional node and:
@@ -28,23 +23,48 @@ In test/test_bfs.py:
 
 ## Software Development Assessment
 
-* Write unit tests (in the test_bfs.py file) for your breadth first search
-* Replace these instructions with a brief description of bfs in your forked repo
-	
-* Automate Testing with a [Github Actions](https://docs.github.com/en/actions)
+### Overview
+This project implements a custom Graph class with Breadth-First Search (BFS) functionality using NetworkX for graph representation.
 
-	See blogposts below on helping set up github actions with pytest:
-	
-	* [post 1](https://blog.dennisokeeffe.com/blog/2021-08-08-pytest-with-github-actions)
-	* [post 2](https://mattsegal.dev/pytest-on-github-actions.html)
-	* Add "! [BuildStatus] (https://github.com/ < your-github-username > /HW2-BFS/workflows/HW2-BFS/badge.svg?event=push)" (update link and remove spaces) to the beginning of your readme file
-	* Also refer to previous assignment for more in-depth help with GitHub actions
 
-	Ensure that the github actions complete the following:
-	* runs pytest
+### Key Components
+- `Graph` class: Manages graph operations
+- BFS implementation with:
+  - Ordered traversal
+  - Efficient node lookup
+  - Path finding
+  - Error handling
 
-# Getting Started
-To get started you will need to fork this repository onto your own github. You will then work on the code base from your own repo and make changes to it in the form of commits. 
+### Implementation  Specifics
+- Ordered boolean dictionary for visited
+- List of lists for queue, to return shortest path
+
+
+### Edge Cases Handled
+- Empty graph
+- Non-existent nodes
+- Unconnected nodes
+
+### Requirements
+- Python 3.7+
+- NetworkX library
+
+### Running Tests
+```bash
+pytest test/test_bfs.py
+```
+
+### Example Usage
+```python
+# Create graph from adjacency list
+graph = Graph(filename='network.adjlist')
+
+# Perform full BFS traversal
+traversal = graph.bfs(start='StartNode')
+
+# Find path between nodes
+path = graph.bfs(start='StartNode', end='EndNode')
+```
 
 # Reference Information
 ## Test Data

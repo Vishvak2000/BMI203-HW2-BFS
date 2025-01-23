@@ -1,26 +1,40 @@
 # write tests for bfs
 import pytest
+import networkx as nx
 from search import graph
 
+
 def test_bfs_traversal():
+    """ 
+    Tests traversal order == netowrkx bfs tree
     """
-    TODO: Write your unit test for a breadth-first
-    traversal here. Create an instance of your Graph class 
-    using the 'tiny_network.adjlist' file and assert 
-    that all nodes are being traversed (ie. returns 
-    the right number of nodes, in the right order, etc.)
-    """
-    pass
+    tiny_network = graph.Graph(filename='./data/tiny_network.adjlist')
+    traversal = tiny_network.bfs(start='Luke Gilbert')
+    nx_tree = nx.bfs_tree(tiny_network.graph, source='Luke Gilbert',sort_neighbors=sorted)
+    nx_traversal = list(nx_tree.nodes)
+    assert traversal == nx_traversal
+
 
 def test_bfs():
+
     """
-    TODO: Write your unit test for your breadth-first 
-    search here. You should generate an instance of a Graph
-    class using the 'citation_network.adjlist' file 
-    and assert that nodes that are connected return 
-    a (shortest) path between them.
+    Tests shortest path
+    """
+    tiny_network = graph.Graph(filename='./data/tiny_network.adjlist')
+    path = tiny_network.bfs(start='Luke Gilbert', end='Hani Goodarzi')
+    assert path == nx.shortest_path(tiny_network.graph,source='Luke Gilbert',target='Hani Goodarzi')
+
+    # End node does not exist
+    with pytest.raises(ValueError):
+        tiny_network.bfs(start='Luke Gilbert',end="non_existent_node")
     
-    Include an additional test for nodes that are not connected 
-    which should return None. 
-    """
-    pass
+    # Start node does not exist
+    with pytest.raises(ValueError):
+        tiny_network.bfs(start='non_existent_node',end="Hani Goodarzi")
+    
+
+
+def test_bfs_edge_cases():
+    empty_graph = graph.Graph(filename='./data/empty_graph.adjlist')
+    with pytest.raises(ValueError):
+        empty_graph.bfs(start='Luke Gilbert')
